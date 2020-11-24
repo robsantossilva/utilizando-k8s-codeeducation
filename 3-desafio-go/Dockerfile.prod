@@ -4,6 +4,5 @@ COPY /3-desafio-go/src/desafio-go .
 RUN go build -ldflags="-s -w" -o /go/app
 
 FROM scratch
-COPY --from=builder /go/app /go/app
-EXPOSE 8000
-CMD ["/go/app"]
+COPY --from=builder /go/app .
+CMD ["./app"]
