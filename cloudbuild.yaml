@@ -1,6 +1,6 @@
 steps:
 
-- id: "decrypted data"
+- id: "Secret Manager"
   name: gcr.io/cloud-builders/gcloud
   entrypoint: 'bash'
   args: [ '-c', "gcloud secrets versions access latest --secret=docker-hub-password --format='get(payload.data)' | tr '_-' '/+' | base64 -d > decrypted-data.txt" ]
@@ -10,12 +10,13 @@ steps:
   entrypoint: 'bash'
   args: [ '-c', 'docker login --username=robsantossilva --password-stdin < decrypted-data.txt']
 
-# - id: "Rodando install"
-#   name: "gcr.io/cloud-builders/go"
-#   args: ["install", "desafio-go"]
-#   env: ["GOPATH=./3-desafio-go"]
+- id: "Rodando install"
+  name: "gcr.io/cloud-builders/go"
+  args: ["install", "desafio-go"]
+  env: ["GOPATH=./3-desafio-go"]
 
-# - id: "Rodando Test"
-#   name: "gcr.io/cloud-builders/go"
-#   args: ["test", "desafio-go"]
-#   env: ["GOPATH=./3-desafio-go"]
+- id: "Rodando Test"
+  name: "gcr.io/cloud-builders/go"
+  args: ["test", "desafio-go"]
+  env: ["GOPATH=./3-desafio-go"]
+
