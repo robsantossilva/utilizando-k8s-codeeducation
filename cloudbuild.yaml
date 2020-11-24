@@ -38,7 +38,7 @@ steps:
   - 'run'
   - '-p'
   - '8000:8000'
-  - 'robsantossilva/desafio-go-codeeducation:latest'
+  - 'robsantossilva/desafio-go-codeeducation'
 
 images:
 - 'robsantossilva/desafio-go-codeeducation:latest'
