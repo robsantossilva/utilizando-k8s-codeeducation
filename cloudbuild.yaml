@@ -28,5 +28,6 @@ steps:
   - 'robsantossilva/desafio-go-codeeducation:latest'
   - '-t'
   - 'robsantossilva/desafio-go-codeeducation:$SHORT_SHA'
+  - '-f'
   - './3-desafio-go/Dockerfile.prod'
 
