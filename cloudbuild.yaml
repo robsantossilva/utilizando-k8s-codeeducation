@@ -20,3 +20,14 @@ steps:
   args: ["test", "desafio-go"]
   env: ["GOPATH=./3-desafio-go"]
 
+- id: "Rodando Build"
+  name: "gcr.io/cloud-builders/docker"
+  args:
+  - 'build'
+  - '-t'
+  - 'robsantossilva/desafio-go-codeeducation:latest'
+  - '-t'
+  - 'robsantossilva/desafio-go-codeeducation:$SHORT_SHA'
+  - './Dockerfile.prod'
+  dir: '3-desafio-go'
+
