@@ -1,5 +1,15 @@
 steps:
 
+- id: "decrypted docker hub password"
+  name: gcr.io/cloud-builders/gcloud
+  entrypoint: 'bash'
+  args: [ '-c', "gcloud secrets versions access latest --secret=secret-name --format='get(payload.data)' | tr '_-' '/+' | base64 -d > decrypted-data.txt" ]
+
+- id: "login docker hub"
+  name: gcr.io/cloud-builders/docker
+  entrypoint: 'bash'
+  args: [ '-c', 'docker login --username=robsantossilva --password-stdin < decrypted-data.txt']
+
 - id: "Rodando install"
   name: "gcr.io/cloud-builders/go"
   args: ["install", "desafio-go"]
@@ -15,13 +25,11 @@ steps:
   args:
   - 'build'
   - '-t'
-  - 'gcr.io/$PROJECT_ID/desafio-go:latest'
+  - 'robsantossilva/desafio-go-codeeducation:latest'
   - '-t'
-  - 'gcr.io/$PROJECT_ID/desafio-go:$SHORT_SHA'
+  - 'robsantossilva/desafio-go-codeeducation:$SHORT_SHA'
   - '.'
-  #args: ["build", "--tag=gcr.io/$PROJECT_ID/desafio-ci-sum:latest", "."]
 
 images:
-- 'gcr.io/$PROJECT_ID/desafio-go:latest'
-- 'gcr.io/$PROJECT_ID/desafio-go:$SHORT_SHA'
-tags: ['cloud-builders-community']
+- 'robsantossilva/desafio-go-codeeducation:latest'
+- 'robsantossilva/desafio-go-codeeducation:$SHORT_SHA'
