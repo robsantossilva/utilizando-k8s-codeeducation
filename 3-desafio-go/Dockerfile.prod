@@ -1,8 +1,18 @@
-FROM golang:1.13.1-alpine3.10 as builder
-WORKDIR $GOPATH/src/app/
+FROM golang:1.14.9-alpine as builder
+WORKDIR /go/src/
 COPY /3-desafio-go/src/desafio-go .
-RUN go build -ldflags="-s -w" -o /go/app
+RUN GOOS=linux go build main.go
 
-FROM scratch
-COPY --from=builder /go/app .
-CMD ["./app"]
+FROM alpine:3.9.6
+COPY --from=builder /go/src/main .
+EXPOSE 8000
+CMD ["./main"]
+
+# FROM golang:1.13.1-alpine3.10 as builder
+# WORKDIR $GOPATH/src/app/
+# COPY /3-desafio-go/src/desafio-go .
+# RUN go build -ldflags="-s -w" -o /go/app
+
+# FROM scratch
+# COPY --from=builder /go/app .
+# CMD ["./app"]
