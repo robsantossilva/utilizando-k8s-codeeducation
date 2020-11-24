@@ -32,6 +32,14 @@ steps:
   - '-f'
   - './3-desafio-go/Dockerfile.prod'
 
+- id: "Run"
+  name: "gcr.io/cloud-builders/docker"
+  args:
+  - 'run'
+  - '-p'
+  - '8000:8000'
+  - 'robsantossilva/desafio-go-codeeducation:latest'
+
 images:
 - 'robsantossilva/desafio-go-codeeducation:latest'
 - 'robsantossilva/desafio-go-codeeducation:$SHORT_SHA'
