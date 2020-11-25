@@ -10,3 +10,5 @@ O nome utilizado para armazenar a senha do docker é:
 <b>docker-hub-password</b>
 
 Docker Hub Image Name: https://hub.docker.com/r/robsantossilva/desafio-go-codeeducation
+
+Url da Aplicação GO implantada com Kubernetes: http://104.155.191.214:8000/ 
