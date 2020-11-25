@@ -32,7 +32,24 @@ steps:
   - '-f'
   - './3-desafio-go/Dockerfile.prod'
 
-images:
-- 'robsantossilva/desafio-go-codeeducation:latest'
-- 'robsantossilva/desafio-go-codeeducation:$SHORT_SHA'
+- id: "Rodando Push Latest"
+  name: "gcr.io/cloud-builders/docker"
+  args: ["push", "robsantossilva/desafio-go-codeeducation:latest"]
+
+- id: "Rodando Push"
+  name: "gcr.io/cloud-builders/docker"
+  args: ["push", "robsantossilva/desafio-go-codeeducation:$SHORT_SHA"]
+
+- id: "Deploy Kubernetes"
+  name: "gcr.io/cloud-builders/gke-deploy"
+  args:
+  - run
+  - --filename=./3-desafio-go/k8s
+  - --image=robsantossilva/desafio-go-codeeducation:latest
+  - --location=us-central1-c
+  - --cluster=my-first-cluster-1
+
+# images:
+# - 'robsantossilva/desafio-go-codeeducation:latest'
+# - 'robsantossilva/desafio-go-codeeducation:$SHORT_SHA'
 
