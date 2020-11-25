@@ -1,5 +1,6 @@
 steps:
 
+  # Configurar uma secret contendo a senha do docker hub com o nome (docker-hub-password)
 - id: "Secret Manager"
   name: gcr.io/cloud-builders/gcloud
   entrypoint: 'bash'
