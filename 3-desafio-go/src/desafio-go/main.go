@@ -6,7 +6,8 @@ import (
 )
 
 func index(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, greeting("Code.education Rocks!"))
+	fmt.Fprintf(w, "<h1>"+greeting("Code.education Rocks!")+"</h1>")
+	fmt.Fprintf(w, "Deploy from kubernetes")
 }
 
 func main() {
